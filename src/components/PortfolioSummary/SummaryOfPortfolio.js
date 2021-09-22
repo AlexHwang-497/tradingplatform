@@ -5,7 +5,7 @@ const SummaryOfPortfolio = () => {
     <section className={classes.summary}>
       <h2>This your portfolio</h2>
       <p>
-        You are on 139. Adding a Modal via a React Portal
+        You are on 140. Managing Cart & Modal State
       </p>
       <p>
         you still need to fix the css for the cart button on the top right
