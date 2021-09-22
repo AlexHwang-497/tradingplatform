@@ -1,4 +1,4 @@
-import classes from './Header.Module.css'
+import classes from './HeaderGandL.Module.css'
 import CartIcon from './CartIcon'
 
 // ! this is the equivalen of HeaderCartButton.js
