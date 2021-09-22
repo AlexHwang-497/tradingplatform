@@ -5,7 +5,10 @@ const SummaryOfPortfolio = () => {
     <section className={classes.summary}>
       <h2>This your portfolio</h2>
       <p>
-        You are on 138.  you are working onthe shopping cart
+        You are on 139. Adding a Modal via a React Portal
+      </p>
+      <p>
+        you still need to fix the css for the cart button on the top right
       </p>
     </section>
   );
