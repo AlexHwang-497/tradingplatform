@@ -10,7 +10,7 @@ const IndividualSecurity = (props) =>{
                 <div className={classes.profit}>TotalProfit={props.profit}</div>
             </div>
             <div>
-                {/* <StockItemForm id={props.id}/> */}
+                <StockItemForm id={props.id}/>
             </div>
 
         </li>
