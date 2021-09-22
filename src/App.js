@@ -14,6 +14,7 @@ function App() {
   const hideCartHandler =() => {
     setCartIsShown(false)
   }
+  // !discuss calos onShowCart and onClose
   return (
     <Fragment>
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
