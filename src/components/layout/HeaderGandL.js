@@ -1,5 +1,8 @@
 import classes from './Header.Module.css'
 import CartIcon from './CartIcon'
+
+// ! this is the equivalen of HeaderCartButton.js
+
 const HeaderGainLoss = (props) => {
     return (
         <button className={classes.button}>

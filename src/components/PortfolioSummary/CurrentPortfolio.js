@@ -1,7 +1,8 @@
 import Card from '../UI/Card'
 import IndividualSecurity from './IndividualSecurity';
+import classes from './CurrentPortfolio.module.css'
 
-
+// ! this is the quivalen of Avaliablemeals.js
 const DUMMY_DATA = [
     {
         "asset_id": "69b15845-7c63-4586-b274-1cfdfe9df3d8",
@@ -97,9 +98,11 @@ const DUMMY_DATA = [
       )
       console.log(portfolioList)
       return (
-          <Card>
-            <ul>{portfolioList}</ul>
-          </Card>
+          <section className={classes.meals}>
+            <Card>
+                <ul>{portfolioList}</ul>
+            </Card>
+          </section>
       )
   }
   
