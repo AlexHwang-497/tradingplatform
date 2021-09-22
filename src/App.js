@@ -8,7 +8,9 @@ function App() {
   return (
     <Fragment>
       <Header/>
-      <PortfolioSummary/>
+      <main>
+        <PortfolioSummary/>
+      </main>
       
 
     </Fragment>

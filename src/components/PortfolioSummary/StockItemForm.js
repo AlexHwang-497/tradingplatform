@@ -16,6 +16,7 @@ const StockItemForm = (props)=>{
                 }}
             />
 
+            <button>+Add</button>
         </form>
     )
 
