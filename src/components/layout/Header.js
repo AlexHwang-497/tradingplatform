@@ -1,7 +1,7 @@
 import { Fragment } from "react";
 import HeaderGainLoss from "./HeaderGandL";
-import classes from './Header.Module.css'
 import mealsImage from '../assets/meals.jpg'
+import classes from './Header.Module.css'
 // 1.  you started here
 const Header = (props)=> {
     return(

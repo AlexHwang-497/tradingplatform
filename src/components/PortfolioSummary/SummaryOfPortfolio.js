@@ -5,7 +5,7 @@ const SummaryOfPortfolio = () => {
     <section className={classes.summary}>
       <h2>This your portfolio</h2>
       <p>
-        You are currently on 136.  you are trying to add a form
+        You are on 138.  you are working onthe shopping cart
       </p>
     </section>
   );
