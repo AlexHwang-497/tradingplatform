@@ -19,7 +19,6 @@ const cartReducer = (state,action)=>{
     }
 }
 
-
 const CartProvider = (props) => {
     // * the goal of this compnent is to manage the current context to data and provide that context to all copnents that want to access it
     const [cartState, dispatchCartAction] = useReducer(cartReducer, defaultCartState)
