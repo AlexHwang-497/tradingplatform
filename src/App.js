@@ -4,6 +4,7 @@ import {Fragment, useState} from 'react'
 import PortfolioSummary from './components/PortfolioSummary/PortfolioSummary';
 import Header from './components/layout/Header';
 import OrderHistory from './components/OrderHistory/OrderHistory';
+import CartProvider from './components/store/CartProvider';
 
 function App() {
   const [cartIsShown,setCartIsShown] = useState(false)
@@ -16,13 +17,14 @@ function App() {
   }
   // !discuss calos onShowCart and onClose
   return (
-    <Fragment>
+    <CartProvider>
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
       <Header onShowCart ={showCartHandler}/>
       <main>
         <PortfolioSummary/>
       </main>
-    </Fragment>
+    </CartProvider>
+    
 
     
   );
