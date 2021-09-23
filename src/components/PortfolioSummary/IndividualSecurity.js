@@ -1,7 +1,23 @@
-import classes from './IndividualSecurity.module.css'
+import { useContext } from 'react'
+
 import StockItemForm from './StockItemForm'
+import classes from './IndividualSecurity.module.css'
+import CartContext from '../store/CartContext'
+
+// ! this is the equivalent MealItem.js
 
 const IndividualSecurity = (props) =>{
+    const cartCtx = useContext(CartContext)
+
+    const addToCartHandler = (amount) =>{
+        cartCtx.addItem({
+            id:props.id,
+            name:props.name,
+            amount:amount,
+            price: props.price,
+        })
+    }
+
     return (
         <li className = {classes.security}>
             <div>
@@ -10,7 +26,7 @@ const IndividualSecurity = (props) =>{
                 <div className={classes.profit}>TotalProfit={props.profit}</div>
             </div>
             <div>
-                <StockItemForm id={props.id}/>
+                <StockItemForm id={props.id} onAddToCart={addToCartHandler}/>
             </div>
 
         </li>

@@ -82,11 +82,12 @@ const DUMMY_DATA = [
     }
   ];
 
-
+// ! talk to carlos in more detail about our ID#'s here
   const CurrentPortfolio = () => {
       const portfolioList = DUMMY_DATA.map((positions)=> (
           <IndividualSecurity
             key = {positions.asset_id}
+            id={positions.asset_id}
             name = {positions.symbol}
             market = {positions.market_value}
             profit = {positions.unrealized_pl}
