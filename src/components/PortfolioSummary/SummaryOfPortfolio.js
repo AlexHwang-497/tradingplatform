@@ -6,7 +6,7 @@ const SummaryOfPortfolio = () => {
       <h2>This your portfolio</h2>
       
       <p>
-        You are on 145. Outputting Cart Items
+        You are on 146. Working on a More Complex Reducer
       </p>
       <p>
       you need to figure out the data that will be presented in orderhisotrycartItem.js
