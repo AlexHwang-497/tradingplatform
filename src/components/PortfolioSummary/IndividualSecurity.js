@@ -1,36 +1,37 @@
-import { useContext } from 'react'
+import { useContext } from 'react';
 
-import StockItemForm from './StockItemForm'
-import classes from './IndividualSecurity.module.css'
-import CartContext from '../store/CartContext'
+import StockItemForm from './StockItemForm';
+import classes from './IndividualSecurity.module.css';
+import CartContext from '../store/CartContext';
 
 // ! this is the equivalent MealItem.js
 
-const IndividualSecurity = (props) =>{
-    const cartCtx = useContext(CartContext)
+const IndividualSecurity = props => {
+	const cartCtx = useContext(CartContext);
 
-    const addToCartHandler = (amount) =>{
-        cartCtx.addItem({
-            id:props.id,
-            name:props.name,
-            amount:amount,
-            price: props.price,
-        })
-    }
+	const addToCartHandler = amount => {
+		console.log('INDIVIDUAL SECURITY', props);
+		// debugger;
+		cartCtx.addItem({
+			id: props.id,
+			name: props.name,
+			amount: amount,
+			price: props.price,
+		});
+	};
 
-    return (
-        <li className = {classes.security}>
-            <div>
-                <h3>{props.name}</h3>
-                <div className={classes.market}>MarketValue={props.market}</div>
-                <div className={classes.profit}>TotalProfit={props.profit}</div>
-            </div>
-            <div>
-                <StockItemForm id={props.id} onAddToCart={addToCartHandler}/>
-            </div>
+	return (
+		<li className={classes.security}>
+			<div>
+				<h3>{props.name}</h3>
+				<div className={classes.market}>MarketValue={props.market}</div>
+				<div className={classes.profit}>TotalProfit={props.profit}</div>
+			</div>
+			<div>
+				<StockItemForm id={props.id} onAddToCart={addToCartHandler} />
+			</div>
+		</li>
+	);
+};
 
-        </li>
-    )
-}
-
-export default IndividualSecurity
+export default IndividualSecurity;
