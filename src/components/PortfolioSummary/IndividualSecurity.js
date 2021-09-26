@@ -15,6 +15,7 @@ const IndividualSecurity = (props) =>{
             name:props.name,
             amount:props.amount,
             price: props.price,
+            market:props.market
             
         })
     }
@@ -23,8 +24,8 @@ const IndividualSecurity = (props) =>{
         <li className = {classes.security}>
             <div>
                 <h3>{props.name}</h3>
-                <div className={classes.market}>MarketValue={props.market}</div>
-                <div className={classes.profit}>TotalProfit={props.profit}</div>
+                <div className={classes.market}>MarketValue=${props.market}</div>
+                <div className={classes.profit}>TotalProfit=${props.profit}</div>
             </div>
             <div>
                 <StockItemForm id={props.id} onAddToCart={addToCartHandler}/>

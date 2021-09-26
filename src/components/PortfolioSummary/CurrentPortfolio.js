@@ -19,7 +19,8 @@ const CurrentPortfolio = () => {
 
             for(const key in responseData){
                 loadedPortfolio.push({
-                    id:key,
+                    key:key,
+                    id:responseData[key].id,
                     name:responseData[key].symbol,
                     market:responseData[key].market_value,
                     profit:responseData[key].unrealized_pl
@@ -33,20 +34,21 @@ const CurrentPortfolio = () => {
         fetchPortfolio()
     },[])
 
-
+// !discuss with carlos in regards to thsi part
       const portfolioList =portfolio.map((positions)=> (
           <IndividualSecurity
             key = {positions.key}
             id={positions.id}
-            name = {positions.symbol}
-            market = {positions.market_value}
-            profit = {positions.unrealized_pl}
+            name = {positions.name}
+            market = {positions.market}
+            profit = {positions.profit}
           />
       )
-
-
+      
+      
       
       )
+      console.log('portfolioList:'+JSON.stringify(portfolio))
       
       return (
           <section className={classes.meals}>
