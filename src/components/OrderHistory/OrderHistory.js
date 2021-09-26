@@ -9,7 +9,7 @@ import CartContext from '../store/CartContext'
 
 const OrderHistory = (props) => {
     const cartCtx = useContext(CartContext)
-    console.log('1.cartCtx:'+cartCtx.item)
+    console.log('1.cartCtx: ' + JSON.stringify(cartCtx.items))
     const totalAmount=`$${cartCtx.totalAmount.toFixed(2)}`
     const hasItems = cartCtx.items.length>0
 
@@ -20,14 +20,15 @@ const OrderHistory = (props) => {
         cartCtx.addItem({...item, amount:1})
     }
 // ! look in cartcontext's item.  understand what is being pulled in the item
+
     const orders = (
         <ul className={classes['cart-items']}>
             {cartCtx.items.map((item)=> (
                 <OrderHistoryCartItem
                     key={item.id}
-                    name ={item.name}
+                    name ={item.symbol}
                     amount={item.amount}
-                    price={item.price}
+                    price={item.current_price}
                     onRemove={cartItemRemoveHandler.bind(null,item.id)}
                     onAdd={cartItemAddHandler.bind(null,item)}
                 />

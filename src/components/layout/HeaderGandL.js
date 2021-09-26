@@ -12,13 +12,13 @@ const HeaderGainLoss = (props) => {
   const cartCtx = useContext(CartContext)
 
   const{items} = cartCtx
-  console.log(cartCtx.items)
+  console.log('cartCtx.items:'+JSON.stringify(cartCtx.items))
 
   // *this will count the number of items we have in our cart or it put it at  0 no items
   const numberOfCartItems = cartCtx.items.reduce((curNumber,item)=> {
     return curNumber + item.amount
   },0)
-
+  console.log('numberOfcartItems:'+numberOfCartItems)
   const btnClasses = `${classes.button} ${btnIsHighlighted ? classes.bump: ''}`
 
   useEffect(()=> {

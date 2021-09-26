@@ -8,13 +8,14 @@ import CartContext from '../store/CartContext'
 
 const IndividualSecurity = (props) =>{
     const cartCtx = useContext(CartContext)
-
+// console.log('stockItemForm:'+JSON.stringify(cartCtx.items))
     const addToCartHandler = (amount) =>{
         cartCtx.addItem({
             id:props.id,
             name:props.name,
-            amount:amount,
+            amount:props.amount,
             price: props.price,
+            
         })
     }
 

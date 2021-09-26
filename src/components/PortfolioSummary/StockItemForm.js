@@ -2,6 +2,7 @@ import {useRef,useState} from 'react'
 
 import classes from './StockItemForm.module.css'
 import Input from '../UI/Input'
+// * this will submit the number of shares into our cart
 // ! this is the equivalent of MealItemForm.js
 const StockItemForm = (props)=>{
     const [amountIsValid,setAmountIsValid] = useState(true)
@@ -10,12 +11,13 @@ const StockItemForm = (props)=>{
     const submitHandler =(event) =>{
         event.preventDefault()
         const enteredAmount = amountInputRef.current.value
+        // * +enteredAmount converts to a number instead of a string
         const enteredAmountNumber = +enteredAmount
 
         if(
             enteredAmount.trim().length===0 ||
             enteredAmountNumber <1 ||
-            enteredAmountNumber>5
+            enteredAmountNumber>500
         ) {
             setAmountIsValid(false)
             return;
@@ -32,7 +34,7 @@ const StockItemForm = (props)=>{
                     id: 'amount_' + props.id,
                     type: 'number',
                     min: '1',
-                    max: '5',
+                    max: '500',
                     step: '1',
                     defaultValue: '1',
                 }}

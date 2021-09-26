@@ -1,7 +1,9 @@
+// ? this compnent is crated to simply manage the current context to data and proivde 
+//? that context to all compnents that want access to it
+
 import { useReducer } from "react";
 
 import CartContext from "./CartContext";
-
 const  defaultCartState = {
     items:[],
     totalAmount:0
@@ -14,6 +16,7 @@ const cartReducer = (state,action)=>{
 
     if(action.type==='ADD'){
         const updatedTotalAmount = state.totalAmount + action.item.price * action.item.amount;
+        console.log('action.item' + JSON.stringify(action.item))
         const existingCartItemIndex = state.items.findIndex((item)=>item.id===action.item.id)
         const existingCartItem = state.items[existingCartItemIndex]
         let updatedItems;
@@ -62,12 +65,14 @@ const CartProvider = (props) => {
     const removeItemToCartHandler=(id)=> {
         dispatchCartAction({type:'REMOVE', id: id})
     }
+    
     const cartContext ={
         items: cartState.items,
         totalAmount:cartState.totalAmount,
         addItem: addItemToCartHandler,
         removeItem: removeItemToCartHandler
     }
+    console.log('cartState.items:'+JSON.stringify(cartState.items))
     return (
         <CartContext.Provider value = {cartContext}>
             {props.children}
