@@ -10,11 +10,15 @@ import classes from './CurrentPortfolio.module.css'
 const CurrentPortfolio = () => {
     const [portfolio,setPortfolio] = useState([])
     const [isLoading, setIsLoading] = useState(true)
+    const [httpError, setHttpError] = useState()
 
     
     useEffect(()=> {
         const fetchPortfolio = async() => {
             const response = await fetch('https://tradingplatform-8a2a3-default-rtdb.firebaseio.com/currentPortfolio.json')
+            if(!response.ok){
+                throw new Error('Something went wrong!!!')
+            }
             console.log('response:'+response)
             const responseData=await response.json()
             const loadedPortfolio=[]
@@ -34,12 +38,24 @@ const CurrentPortfolio = () => {
             setPortfolio(loadedPortfolio)
             setIsLoading(false)
         }
-        fetchPortfolio()
+        fetchPortfolio().catch((error)=>{
+            setIsLoading(false)
+            setHttpError(error.message)
+        })
     },[])
+
     if(isLoading){
         return (
             <section className={classes.MealsLoading}>
                 <p>Loading...</p>
+            </section>
+        )
+    }
+
+    if(httpError){
+        return(
+            <section className={classes.MealsError}>
+                <p>{httpError}</p>
             </section>
         )
     }
@@ -54,7 +70,6 @@ const CurrentPortfolio = () => {
             profit = {positions.profit}
           />
       )
-      
       
       
       )
