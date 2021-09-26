@@ -9,6 +9,8 @@ import classes from './CurrentPortfolio.module.css'
 // ! talk to carlos in more detail about our ID#'s here
 const CurrentPortfolio = () => {
     const [portfolio,setPortfolio] = useState([])
+    const [isLoading, setIsLoading] = useState(true)
+
     
     useEffect(()=> {
         const fetchPortfolio = async() => {
@@ -30,9 +32,17 @@ const CurrentPortfolio = () => {
             }
             console.log('loadedPortfolio:'+JSON.stringify(loadedPortfolio))
             setPortfolio(loadedPortfolio)
+            setIsLoading(false)
         }
         fetchPortfolio()
     },[])
+    if(isLoading){
+        return (
+            <section className={classes.MealsLoading}>
+                <p>Loading...</p>
+            </section>
+        )
+    }
 
 // !discuss with carlos in regards to thsi part
       const portfolioList =portfolio.map((positions)=> (
