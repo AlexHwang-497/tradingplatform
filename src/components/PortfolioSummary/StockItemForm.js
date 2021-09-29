@@ -22,6 +22,7 @@ const StockItemForm = (props)=>{
             setAmountIsValid(false)
             return;
         }
+        
         props.onAddToCart(enteredAmountNumber)
     }
 
@@ -36,7 +37,7 @@ const StockItemForm = (props)=>{
                     min: '1',
                     max: '500',
                     step: '1',
-                    defaultValue: '1',
+                    defaultValue: 1,
                 }}
             />
 

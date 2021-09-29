@@ -6,6 +6,7 @@ import CartContext from '../store/CartContext'
 
 // ! this is the equivalent MealItem.js
 
+// ! look at the for(const key in responseData) to get the correct data
 const IndividualSecurity = (props) =>{
     const cartCtx = useContext(CartContext)
 // console.log('stockItemForm:'+JSON.stringify(cartCtx.items))
@@ -13,7 +14,7 @@ const IndividualSecurity = (props) =>{
         cartCtx.addItem({
             id:props.id,
             name:props.name,
-            amount:props.amount,
+            amount:amount,
             price: props.price,
             market:props.market
             
@@ -26,9 +27,10 @@ const IndividualSecurity = (props) =>{
                 <h3>{props.name}</h3>
                 <div className={classes.market}>MarketValue=${props.market}</div>
                 <div className={classes.profit}>TotalProfit=${props.profit}</div>
+                <div className={classes.profit}># of shares: {props.amount}</div>
             </div>
             <div>
-                <StockItemForm id={props.id} onAddToCart={addToCartHandler}/>
+                <StockItemForm id={props.id} onAddToCart={addToCartHandler} />
             </div>
 
         </li>

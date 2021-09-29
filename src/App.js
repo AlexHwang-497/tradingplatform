@@ -5,6 +5,11 @@ import PortfolioSummary from './components/PortfolioSummary/PortfolioSummary';
 import Header from './components/layout/Header';
 import OrderHistory from './components/OrderHistory/OrderHistory';
 import CartProvider from './components/store/CartProvider';
+import OrderForm from './components/OrderForm/OrderForm';
+import LatestQuotes from './components/LatestQuote/LatestQuotes';
+
+
+
 
 function App() {
   const [cartIsShown,setCartIsShown] = useState(false)
@@ -18,10 +23,14 @@ function App() {
   // !discuss calos onShowCart and onClose
   return (
     <CartProvider>
+
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
       <Header onShowCart ={showCartHandler}/>
       <main>
         <PortfolioSummary/>
+      
+    <OrderForm/>
+    <LatestQuotes/>
       </main>
     </CartProvider>
     

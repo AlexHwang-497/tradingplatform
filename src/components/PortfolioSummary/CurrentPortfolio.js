@@ -29,12 +29,14 @@ const CurrentPortfolio = () => {
                     id:responseData[key].id,
                     name:responseData[key].symbol,
                     market:responseData[key].market_value,
-                    profit:responseData[key].unrealized_pl
+                    profit:responseData[key].unrealized_pl,
+                    amount:responseData[key].qty,
+                    price:responseData[key].avg_entry_price,
 
 
                 })
             }
-            console.log('loadedPortfolio:'+JSON.stringify(loadedPortfolio))
+            // console.log('loadedPortfolio:'+JSON.stringify(loadedPortfolio))
             setPortfolio(loadedPortfolio)
             setIsLoading(false)
         }
@@ -68,18 +70,21 @@ const CurrentPortfolio = () => {
             name = {positions.name}
             market = {positions.market}
             profit = {positions.profit}
+            amount = {positions.amount}
+            price = {positions.price}
           />
       )
       
       
       )
-      console.log('portfolioList:'+JSON.stringify(portfolio))
+    //   console.log('portfolioList:'+JSON.stringify(portfolio))
       
       return (
           <section className={classes.meals}>
             <Card>
                 <ul>{portfolioList}</ul>
             </Card>
+            
           </section>
       )
     }

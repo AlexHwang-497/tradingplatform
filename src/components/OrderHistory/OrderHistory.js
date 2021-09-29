@@ -25,6 +25,19 @@ const OrderHistory = (props) => {
     const orderHandler =() =>{
         setIsCheckout(true)
     }
+
+    const submitOrderHandler=(userData)=> {
+        fetch('https://tradingplatform-8a2a3-default-rtdb.firebaseio.com/currentPortfolio.json',{
+            method:'POST',
+            body: JSON.stringify({
+                user:userData,
+                orderedItems:cartCtx.items
+            })
+        })
+    }
+
+
+    
 // ! look in cartcontext's item.  understand what is being pulled in the item
 
     const orders = (
@@ -32,9 +45,9 @@ const OrderHistory = (props) => {
             {cartCtx.items.map((item)=> (
                 <OrderHistoryCartItem
                     key={item.id}
-                    name ={item.symbol}
+                    name ={item.name}
                     amount={item.market}
-                    price={item.profit}
+                    price={item.price}
                     onRemove={cartItemRemoveHandler.bind(null,item.id)}
                     onAdd={cartItemAddHandler.bind(null,item)}
                 />
@@ -61,7 +74,7 @@ const OrderHistory = (props) => {
                 <span>Total Amount</span>
                 <span>{totalAmount}</span>
             </div>
-                {isCheckout && <Checkout onCancel={props.onClose}/>}
+                {isCheckout && <Checkout onConfirm={submitOrderHandler} onCancel={props.onClose}/>}
                 {!isCheckout && modalActions}
         </Modal>
     )
