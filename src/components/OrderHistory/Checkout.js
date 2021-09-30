@@ -42,6 +42,13 @@ const Checkout = (props) =>{
         const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid
 
         if(!formIsValid){return;}
+
+        props.onConfirm({
+            symbol:enteredSymbol,
+            quantity:enteredQty,
+            order:enteredOrder,
+            transactionPrice:enteredTransactionPrice
+        })
     }
 
     const symbolControlClasses = `${classes.control} ${

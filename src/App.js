@@ -20,6 +20,10 @@ function App() {
   const hideCartHandler =() => {
     setCartIsShown(false)
   }
+
+  
+
+
   // !discuss calos onShowCart and onClose
   return (
     <CartProvider>
@@ -27,10 +31,9 @@ function App() {
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
       <Header onShowCart ={showCartHandler}/>
       <main>
-        <PortfolioSummary/>
-      
-    <OrderForm/>
-    <LatestQuotes/>
+      <PortfolioSummary/>
+        
+        <OrderForm/>
       </main>
     </CartProvider>
     
