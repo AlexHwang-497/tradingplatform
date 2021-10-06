@@ -41,6 +41,7 @@ const AuthForm =()=>{
                 'Content-Type':'application/json'
             }
         }).then((res)=>{
+            setIsLoading(false)
             if(res.ok){
 
             } else {
@@ -64,7 +65,9 @@ const AuthForm =()=>{
                     <input type='password' id='password' required ref={passowrdInputRef}></input>
                 </div>
                 <div className={classes.actions}>
-                    <button> {isLogin ? 'Login' : 'Create Account'}</button>
+                    {!isLoading && <button> {isLogin ? 'Login' : 'Create Account'}</button>}
+                    {isLoading && <p>Sending Request.............</p>}
+                    
                     <button type ='button' className = {classes.toggle} onClick={switchAuthModeHandler}>
                         {isLogin? 'Create new account' : 'Login with existing account'}
                     </button>
