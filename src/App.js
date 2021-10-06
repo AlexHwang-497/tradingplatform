@@ -7,6 +7,7 @@ import { BrowserRouter } from 'react-router-dom';
 
 import HomePage from './pages/HomePage';
 import Layout from './components/layout/Layout';
+import AuthPage from './pages/AuthPage';
 
 
 
@@ -22,6 +23,12 @@ function App() {
         <Route path='/dashboard'>
             <Dashboard />
         </Route>
+
+        <Route path='/auth'>
+            <AuthPage/>
+        </Route>
+
+        
       </Switch>
     </Layout>
     
