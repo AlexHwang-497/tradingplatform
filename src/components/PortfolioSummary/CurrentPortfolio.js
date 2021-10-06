@@ -32,6 +32,7 @@ const CurrentPortfolio = () => {
                     profit:responseData[key].unrealized_pl,
                     amount:responseData[key].qty,
                     price:responseData[key].avg_entry_price,
+                    
 
 
                 })

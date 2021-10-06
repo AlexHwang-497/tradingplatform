@@ -3,6 +3,7 @@ import classes from "./LatestQuote.module.css"
 import apisauce from "apisauce"
 import config from "./config"
 import OrderForm from "../OrderForm/OrderForm";
+import OrderHistory from "../OrderHistory/OrderHistory";
 
 const LatestQuotes = (props) => {
     const [quotePrice,setQuotePrice]=useState([])
@@ -24,7 +25,7 @@ const LatestQuotes = (props) => {
 // console.log('security',props.enteredSymbol)
 useEffect(() => {
     const security= props.enteredSymbol || 'amzn'
-    setStockSymbol(security)
+    
     const fetchLatestQuote = async () => {
       
       const response = await fetch(
@@ -68,13 +69,33 @@ useEffect(() => {
 
   const currentPrice = quotePrice.map((data)=>(data.currentPrice))
   const symbol = quotePrice.map((data)=>(data.symbol))
-  // console.log('mapped symbol',symbol[0])
+  
+  
+  
+  const submitOrderHandler = async(userData) => {
+    console.log('you just submitted an order')
+      
+      const response = await fetch('https://tradingplatform-8a2a3-default-rtdb.firebaseio.com/orders.json',{
+          method:'POST',
+          body:JSON.stringify({
+            user:userData
+              
+          })
+          
+      })
+      const data = await response.json();
+      console.log('data',data)
+      console.log('the order has been submitted')
+      // setStockSymbol(security)
 
+  }
 
   return (
     <Card>
+      
       <h1>Here are the Symbol: {symbol[0]}</h1>
       <h2>Here are the Current Price:${currentPrice[0]}</h2>
+      <OrderForm onConfirm={submitOrderHandler}/>
     </Card>
   )
 }

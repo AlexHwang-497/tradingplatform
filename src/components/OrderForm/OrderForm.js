@@ -55,16 +55,17 @@ const OrderForm =(props) =>{
         const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid
 
         if(!formIsValid){return;}
+        
+        props.onConfirm({
+            symbol:enteredSymbol,
+            quantity:enteredQty,
+            order:enteredOrder,
+            transactionPrice:enteredTransactionPrice
+        })
 
         
+
         
-        // const onConfirm= ()=>({
-        //     symbol:enteredSymbol,
-        //     quantity:enteredQty,
-        //     order:enteredOrder,
-        //     transactionPrice:enteredTransactionPrice
-    
-        // })
     }
     
     const symbolControlClasses = `${classes.control} ${
@@ -84,20 +85,7 @@ const OrderForm =(props) =>{
     //   console.log('qtyInputRef:',qtyInputRef.current.value)
     //   console.log('orderInputRef:',orderInputRef.current.value)
     //   console.log('transactionInputRef:',transactionInputRef.current.value)
-      const submitOrderHandler = async(userData) => {
-        console.log('you just submitted an order')
-          
-          await fetch('https://tradingplatform-8a2a3-default-rtdb.firebaseio.com/orders.json',{
-              method:'POST',
-              body:JSON.stringify({
-                  
-
-                
-                  
-              })
-          })
-          console.log('the order has been submitted')
-      }
+      
 
 
     return (
@@ -132,7 +120,7 @@ const OrderForm =(props) =>{
                     <button className={classes.submit} >Confirm</button>
                 </div>
             </form>
-            <LatestQuotes enteredSymbol = {postSymbol} onConfirm ={submitOrderHandler}/>
+            
         </Card>
 
 
