@@ -2,11 +2,15 @@ import { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import AuthPage from "../../pages/AuthPage";
 
+import AuthContext from "../store/AuthContext";
+
 import classes from './AuthFrom.module.css'
 
 const AuthForm =()=>{
     const emailInputRef = useRef()
     const passowrdInputRef= useRef()
+
+    const authCtx = useContext(AuthContext)
 
     const [isLogin, setIsLogin] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
@@ -43,13 +47,20 @@ const AuthForm =()=>{
         }).then((res)=>{
             setIsLoading(false)
             if(res.ok){
+                return res.json()
 
             } else {
                 return res.json().then((data)=>{
                     let errorMessage='Authentication failed!'
-                    alert(errorMessage)
+                    throw new Error(errorMessage)
                 })
             }
+        })
+        .then((data)=>{
+            authCtx.login(data.idToken)
+        })
+        .catch((err)=>{
+            alert(err.message)
         })
     }
     return (
