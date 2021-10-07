@@ -7,6 +7,7 @@ import AuthContext from "../store/AuthContext";
 import classes from './AuthFrom.module.css'
 
 const AuthForm =()=>{
+    const history = useHistory()
     const emailInputRef = useRef()
     const passowrdInputRef= useRef()
 
@@ -57,7 +58,11 @@ const AuthForm =()=>{
             }
         })
         .then((data)=>{
-            authCtx.login(data.idToken)
+            const expirationTime=new Date(
+                new Date().getTime() +  +data.expiresIn*1000
+            )
+            authCtx.login(data.idToken, expirationTime.toISOString())
+            history.replace('/')
         })
         .catch((err)=>{
             alert(err.message)

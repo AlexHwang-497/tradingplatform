@@ -26,6 +26,7 @@ const ProfileForm =() => {
                 'Content-Type' : 'application/json'
             }
         }).then(res=>{
+            console.log('authCtx.token',authCtx.token)
             history.replace('/')
         })
         return (
