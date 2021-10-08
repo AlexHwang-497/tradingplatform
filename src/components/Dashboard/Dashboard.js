@@ -1,4 +1,3 @@
-
 import '../../App.css';
 import {Fragment, useState} from 'react'
 import PortfolioSummary from '../../components/PortfolioSummary/PortfolioSummary';
@@ -7,9 +6,6 @@ import OrderHistory from '../../components/OrderHistory/OrderHistory';
 import CartProvider from '../../components/store/CartProvider';
 import OrderForm from '../../components/OrderForm/OrderForm';
 import LatestQuotes from '../../components/LatestQuote/LatestQuotes';
-
-
-
 
 
 function Dashboard() {
@@ -22,23 +18,15 @@ function Dashboard() {
     setCartIsShown(false)
   }
 
-
-
-
-  // !discuss calos onShowCart and onClose
   return (
     <CartProvider>
-      
-
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
       <Header onShowCart ={showCartHandler}/>
       <main>
-      <PortfolioSummary/>
-      <LatestQuotes/>
-        
+        <PortfolioSummary/>
+        <LatestQuotes/>
       </main>
     </CartProvider>
-    
   );
 }
 export default Dashboard;

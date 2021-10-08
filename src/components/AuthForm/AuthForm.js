@@ -15,6 +15,7 @@ const AuthForm =()=>{
 
     const [isLogin, setIsLogin] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
+    const [userId, setUserId] = useState('')
 
     const switchAuthModeHandler = () => {
         setIsLogin((prevState) => !prevState);
@@ -58,6 +59,10 @@ const AuthForm =()=>{
             }
         })
         .then((data)=>{
+            
+            setUserId(data.localId)
+            
+
             const expirationTime=new Date(
                 new Date().getTime() +  +data.expiresIn*1000
             )
@@ -67,7 +72,9 @@ const AuthForm =()=>{
         .catch((err)=>{
             alert(err.message)
         })
+
     }
+    console.log('userId',userId)
     return (
         <section className={classes.auth}>
             <h1>{isLogin ? 'Login' : 'Sign Up'}</h1>

@@ -62,10 +62,6 @@ const OrderForm =(props) =>{
             order:enteredOrder,
             transactionPrice:enteredTransactionPrice
         })
-
-        
-
-        
     }
     
     const symbolControlClasses = `${classes.control} ${
@@ -90,7 +86,6 @@ const OrderForm =(props) =>{
 
     return (
         <Card>
-
             <form className={classes.form} onSubmit={confirmHandler}>
                 <div className={classes.control}>
                     <label htmlFor='Symbol'>Symbol</label>
@@ -112,7 +107,6 @@ const OrderForm =(props) =>{
                     <input type='text' id='transactionPrice' ref={transactionInputRef}/>
                     {!formInputsValidity.transactionPrice && <p>Please Entere a Valid Price</p>}
                 </div>
-
                 <div className={classes.actions}>
                     <button type='button' >
                         Cancel
@@ -120,7 +114,6 @@ const OrderForm =(props) =>{
                     <button className={classes.submit} >Confirm</button>
                 </div>
             </form>
-            
         </Card>
 
 

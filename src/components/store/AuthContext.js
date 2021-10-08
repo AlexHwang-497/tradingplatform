@@ -30,6 +30,7 @@ const retrieveStoredToken = () => {
         return null
     }
 
+    console.log('storedToken',storedToken)
     return {
         token:storedToken,
         duration: remainingTime
