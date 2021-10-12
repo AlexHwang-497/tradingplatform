@@ -24,7 +24,7 @@ const IndividualSecurity = (props) =>{
     return (
         <li className = {classes.security}>
             <div>
-                <h3>{props.name}</h3>
+                <h3 className={classes.name}>{props.name}</h3>
                 <div className={classes.market}>MarketValue=${props.market}</div>
                 <div className={classes.profit}>TotalProfit=${props.profit}</div>
                 <div className={classes.profit}># of shares: {props.amount}</div>

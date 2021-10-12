@@ -6,6 +6,7 @@ import OrderHistory from '../../components/OrderHistory/OrderHistory';
 import CartProvider from '../../components/store/CartProvider';
 import OrderForm from '../../components/OrderForm/OrderForm';
 import LatestQuotes from '../../components/LatestQuote/LatestQuotes';
+import OrderFill from '../OrderFill/OrderFill';
 
 
 function Dashboard() {
@@ -20,6 +21,7 @@ function Dashboard() {
 
   return (
     <CartProvider>
+    <OrderFill/>
       {cartIsShown && <OrderHistory onClose ={hideCartHandler}/>}
       <Header onShowCart ={showCartHandler}/>
       <main>

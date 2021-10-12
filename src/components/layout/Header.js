@@ -23,7 +23,7 @@ const Header = (props)=> {
                 <h1>ReactMeals</h1>
                 <ul>
                     <HeaderGainLoss onClick={props.onShowCart}/>
-                    {isLoggedIn && (<button oncClick={logoutHandler}>Logout</button>)}                    
+                    {/* {isLoggedIn && (<button oncClick={logoutHandler}>Logout</button>)}                     */}
 
                 </ul>
                 

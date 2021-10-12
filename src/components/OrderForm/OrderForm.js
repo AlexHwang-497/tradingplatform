@@ -47,27 +47,27 @@ const OrderForm =(props) =>{
         setOrder(enteredOrder)
         const enteredTransactionPrice=transactionInputRef.current.value
         setTransactionPrice(enteredTransactionPrice)
-        const enteredUserId=userIdInputRef.current.value
-        setUserId(enteredUserId)
+        // const enteredUserId=userIdInputRef.current.value
+        // setUserId(enteredUserId)
 
         const enteredSymbolIsValid = !isEmpty(enteredSymbol)
         const enteredQtyIsValid = !isEmpty(enteredQty)
         const enteredOrderIsValid= !isEmpty(enteredOrder)
         const enteredTransactionPriceIsValid=!isEmpty(enteredTransactionPrice)
-        const enteredUserIdIsValid=!isEmpty(enteredUserId)
+        // const enteredUserIdIsValid=!isEmpty(enteredUserId)
 
         setFormInputValidity({
             symbol:enteredSymbolIsValid,
             quantity:enteredQtyIsValid,
             order: enteredOrderIsValid,
             transactionPrice: enteredTransactionPriceIsValid,
-            userId: enteredUserIdIsValid
+            // userId: enteredUserIdIsValid
         })
 
         setStockSymbol(enteredSymbol)
         console.log('stockSymbol',JSON.stringify(postSymbol))
 
-        const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid && enteredUserIdIsValid
+        const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid
 
         if(!formIsValid){return;}
         
@@ -96,21 +96,16 @@ const OrderForm =(props) =>{
         formInputsValidity.userId ? '' : classes.invalid
       }`;
 
-    //   console.log('symbolInputRef:',symbolInputRef.current.value)
-    //   console.log('qtyInputRef:',qtyInputRef.current.value)
-    //   console.log('orderInputRef:',orderInputRef.current.value)
-    //   console.log('transactionInputRef:',transactionInputRef.current.value)
-      
-
+    
 
     return (
         <Card>
             <form className={classes.form} onSubmit={confirmHandler}>
-                <div className={classes.control}>
+                {/* <div className={classes.control}>
                     <label htmlFor='UserID'>UserID</label>
                     <input type='text' id='userID' ref={userIdInputRef}/>
                     {!formInputsValidity.userId && <p>Please Enter a Valid Symbol</p>}
-                </div>
+                </div> */}
                 <div className={classes.control}>
                     <label htmlFor='Symbol'>Symbol</label>
                     <input type='text' id='symbol' ref={symbolInputRef}  />
