@@ -1,7 +1,7 @@
 import { useState, useRef, useContext } from "react";
 import { useHistory } from "react-router-dom";
 import AuthPage from "../../pages/AuthPage";
-
+import OrderForm from "../OrderForm/OrderForm";
 import AuthContext from "../store/AuthContext";
 
 import classes from './AuthFrom.module.css'
@@ -15,6 +15,7 @@ const AuthForm =()=>{
 
     const [isLogin, setIsLogin] = useState(true)
     const [isLoading,setIsLoading] = useState(false)
+    // *this is the current user's ID
     const [userId, setUserId] = useState('')
 
     const switchAuthModeHandler = () => {
@@ -58,16 +59,24 @@ const AuthForm =()=>{
                 })
             }
         })
+        
         .then((data)=>{
-            
+            console.log('data in authForm', data)
             setUserId(data.localId)
+            
+            const currentUserId = data.localId
+            // console.log('curent user in auth form',currentUserId)
+
+            
             
 
             const expirationTime=new Date(
                 new Date().getTime() +  +data.expiresIn*1000
             )
-            authCtx.login(data.idToken, expirationTime.toISOString())
+            authCtx.login(data.idToken, expirationTime.toISOString(),data.localId)
+            
             history.replace('/')
+
         })
         .catch((err)=>{
             alert(err.message)

@@ -5,9 +5,12 @@ let logoutTimer;
 const AuthContext= React.createContext({
     token:'',
     isLoggedIn: false,
+    userId:'',
     login:(token)=> {},
     logout:()=>{}
 })
+
+
 
 const calculateRemainingTime = (expirationTime) => {
     const currentTime = new Date().getTime()
@@ -17,10 +20,20 @@ const calculateRemainingTime = (expirationTime) => {
 
     return remainingDuration
 }
+const retrieveUserId = ()=>{
+    const aaaaa = localStorage.getItem('currentUserId')
+    console.log('aaaaa',aaaaa)
+
+}
 
 const retrieveStoredToken = () => {
     const storedToken = localStorage.getItem('token')
+
     const storedExpirationDate = localStorage.getItem('expirationTime')
+    
+    
+
+
 
     const remainingTime=calculateRemainingTime(storedExpirationDate)
     
@@ -30,21 +43,28 @@ const retrieveStoredToken = () => {
         return null
     }
 
-    console.log('storedToken',storedToken)
+    console.log('storedToken',JSON.stringify(storedToken))
     return {
         token:storedToken,
         duration: remainingTime
+        
     }
 }
 
+
+
 export const AuthContextProvider = (props) =>{
+    console.log('props inside of AuthContextProvider',props)
     const tokenData = retrieveStoredToken()
+    const usersData = retrieveUserId()
 
     let initialToken
 
     if(tokenData){
         initialToken = tokenData.token
     }
+
+    const [userId, setUserId] = useState('')
 
     const [token, setToken] = useState(initialToken)
 
@@ -61,29 +81,36 @@ export const AuthContextProvider = (props) =>{
         }
     },[])
 // *expirationTime will be provided in authForm aka authCtx.login(data.idToken, expirationTime.toISOString())
-    const loginHandler = (token, expirationTime) => {
+    const loginHandler = (token, expirationTime,userId) => {
         setToken(token)
+        setUserId(userId)
         localStorage.setItem('token',token)
         localStorage.setItem('expirationTime',expirationTime)    
+        localStorage.setItem('userId',userId)    
+        console.log('locla storage expiration time', expirationTime)
         
         const remainingTime = calculateRemainingTime(expirationTime)
         logoutTimer=setTimeout(logoutHandler,remainingTime)
-        // logoutTimer=setTimeout(logoutHandler,remainingTime)
+        
     }
+
+    console.log('inside AUthContext', token)
 
     useEffect(()=> {
         if(tokenData){
-            console.log(tokenData.duration)
+            // console.log(tokenData.duration)
             logoutTimer=setTimeout(logoutHandler, tokenData.duration)
         }
     },[tokenData,logoutHandler])
 
-
+    
+// * this is actually your state value; this is a piece of state.  this is what is provided to all other componets
     const contextValue =  {
         token: token,
         isLoggedIn: userIsLoggedIn,
         login: loginHandler,
-        logout: logoutHandler
+        logout: logoutHandler,
+        userId:userId
     }
 // ! ask carlos why we need .provoider
     return (

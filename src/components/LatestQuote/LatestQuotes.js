@@ -1,10 +1,11 @@
-import { useEffect, useState, React } from "react";import Card from "../UI/Card"
+import { useEffect, useState, useContext, React } from "react";import Card from "../UI/Card"
 import classes from "./LatestQuote.module.css"
 import apisauce from "apisauce"
 import config from "./config"
 import OrderForm from "../OrderForm/OrderForm";
 import OrderHistory from "../OrderHistory/OrderHistory";
 import AuthForm from "../AuthForm/AuthForm";
+import AuthContext from "../store/AuthContext";
 
 
 const LatestQuotes = (props) => {
@@ -12,11 +13,10 @@ const LatestQuotes = (props) => {
     const [quotePrice,setQuotePrice]=useState([])
     const [stockSymbol,setStockSymbol]=useState('')
 
-    
-    
+  
+    const authCtx = useContext(AuthContext)
+    // console.log('authCtx in latest Quotes', authCtx)
 
-    const aaa = props.enteredSymbol
-    console.log('aaa',aaa)
   const api = apisauce.create({
     baseURL: config.APCA_API_BASE_URL,
     headers: {
@@ -26,7 +26,6 @@ const LatestQuotes = (props) => {
     timeout: 5000
   })
   
-console.log('security',props.enteredSymbol)
 useEffect(() => {
     const security= stockSymbol || 'spy'
     
@@ -72,20 +71,18 @@ useEffect(() => {
 
   const currentPrice = quotePrice.map((data)=>(data.currentPrice))
   const symbol = quotePrice.map((data)=>(data.symbol))
-  console.log('currentPrice',currentPrice)
-  console.log('symbol',symbol)
+  
 
+const submitUserId =()=>{
+  console.log('authform has been intiated in submituserID')
+  
+  
 
-  const symbolChangerHandler = (event) =>{
-    setStockSymbol(stockSymbol[0])
 }
-
-
+  
   const submitOrderHandler = async(userData) => {
     console.log('you just submitted an order')
 
-    // setStockSymbol(stockSymbol[0])
-    console.log('stocksymbol',userData.symbol)
     setStockSymbol(userData.symbol)
       const response = await fetch('https://tradingplatform-8a2a3-default-rtdb.firebaseio.com/orders.json',{
           method:'POST',
@@ -94,8 +91,7 @@ useEffect(() => {
           })  
       })
       const data = await response.json();
-      console.log('data',data)
-      console.log('userData',userData)
+      
       console.log('the order has been submitted')
       // setStockSymbol(security)
   }
@@ -107,6 +103,7 @@ useEffect(() => {
         <h1>Here are the Current Price:${currentPrice[0]}</h1>
       </Card>
         <OrderForm onConfirm={submitOrderHandler}/>
+
     </section>
   )
 }

@@ -1,29 +1,40 @@
-import {useState, useRef, useEffect} from 'react'
+import {useState, useRef, useEffect, useContext} from 'react'
 import Card from '../UI/Card'
 import classes from './OrderForm.module.css'
 import LatestQuotes from '../LatestQuote/LatestQuotes';
 import CartContext from '../store/CartContext';
+import AuthForm from '../AuthForm/AuthForm';
+import AuthContext from '../store/AuthContext';
+
 
 const isEmpty = (value) => value.trim==='';
 
+
 const OrderForm =(props) =>{
+    const authCtx = useContext(AuthContext)
+    
     const [formInputsValidity,setFormInputValidity] = useState({
         symbol:true,
         quantity:true,
         order:true,
-        transactionPrice:true
+        transactionPrice:true,
+        userId:true
     })
     const [postSymbol,setStockSymbol]=useState('')
     const [postQuantity,setStockQuanity]=useState('')
     const [postOrder,setOrder]=useState('')
     const [postTransaction,setTransactionPrice]=useState('')
 
+    const [postUserId,setUserId] = useState('')
+    
 
+    console.log('authCtx in order form',authCtx)
     
     const symbolInputRef=useRef()
     const qtyInputRef=useRef()
     const orderInputRef=useRef()
     const transactionInputRef = useRef()
+    const userIdInputRef = useRef()
 
     const confirmHandler = (event)=>{
         event.preventDefault()
@@ -36,23 +47,27 @@ const OrderForm =(props) =>{
         setOrder(enteredOrder)
         const enteredTransactionPrice=transactionInputRef.current.value
         setTransactionPrice(enteredTransactionPrice)
+        const enteredUserId=userIdInputRef.current.value
+        setUserId(enteredUserId)
 
         const enteredSymbolIsValid = !isEmpty(enteredSymbol)
         const enteredQtyIsValid = !isEmpty(enteredQty)
         const enteredOrderIsValid= !isEmpty(enteredOrder)
         const enteredTransactionPriceIsValid=!isEmpty(enteredTransactionPrice)
+        const enteredUserIdIsValid=!isEmpty(enteredUserId)
 
         setFormInputValidity({
             symbol:enteredSymbolIsValid,
             quantity:enteredQtyIsValid,
             order: enteredOrderIsValid,
-            transactionPrice: enteredTransactionPriceIsValid
+            transactionPrice: enteredTransactionPriceIsValid,
+            userId: enteredUserIdIsValid
         })
 
         setStockSymbol(enteredSymbol)
         console.log('stockSymbol',JSON.stringify(postSymbol))
 
-        const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid
+        const formIsValid = enteredSymbolIsValid && enteredQtyIsValid && enteredOrderIsValid && enteredTransactionPriceIsValid && enteredUserIdIsValid
 
         if(!formIsValid){return;}
         
@@ -60,7 +75,8 @@ const OrderForm =(props) =>{
             symbol:enteredSymbol,
             quantity:enteredQty,
             order:enteredOrder,
-            transactionPrice:enteredTransactionPrice
+            transactionPrice:enteredTransactionPrice,
+            userId:authCtx.userId
         })
     }
     
@@ -76,6 +92,9 @@ const OrderForm =(props) =>{
       const transactionPriceControlClasses = `${classes.control} ${
         formInputsValidity.transactionPrice ? '' : classes.invalid
       }`;
+      const userIdControlClasses = `${classes.control} ${
+        formInputsValidity.userId ? '' : classes.invalid
+      }`;
 
     //   console.log('symbolInputRef:',symbolInputRef.current.value)
     //   console.log('qtyInputRef:',qtyInputRef.current.value)
@@ -87,6 +106,11 @@ const OrderForm =(props) =>{
     return (
         <Card>
             <form className={classes.form} onSubmit={confirmHandler}>
+                <div className={classes.control}>
+                    <label htmlFor='UserID'>UserID</label>
+                    <input type='text' id='userID' ref={userIdInputRef}/>
+                    {!formInputsValidity.userId && <p>Please Enter a Valid Symbol</p>}
+                </div>
                 <div className={classes.control}>
                     <label htmlFor='Symbol'>Symbol</label>
                     <input type='text' id='symbol' ref={symbolInputRef}  />
@@ -121,3 +145,4 @@ const OrderForm =(props) =>{
 }
 
 export default OrderForm
+
